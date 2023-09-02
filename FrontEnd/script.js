@@ -13,8 +13,8 @@ let cold = "Too cold for rain!";
 let err = "Incorrect reading, cannot give estimate for rain";
 
 
-  let valueURL = 'https://localhost:7283/api/WeatherValues/GetLastValue';
-  let messageURL = 'https://localhost:7283/api/WeatherValues/GetMessage';
+  let valueURL = 'https://localhost:7131/api/WeatherValues/GetLastValue';
+  let messageURL = 'https://localhost:7131/api/WeatherValues/GetMessage';
 
 
   function getMessage() {
@@ -29,24 +29,24 @@ let err = "Incorrect reading, cannot give estimate for rain";
           document.getElementById("message").innerHTML = `${x.message}`;
 
           if(x.message===no){
-            document.body.style.backgroundImage = "url('sunnyday.jpg')";
+            document.body.style.backgroundImage = "url('./Backgrounds/sunnyday.jpg')";
             document.getElementById("message-container").style.backgroundColor = "lightyellow";
             document.getElementById("message-container").style.color="black";
             document.getElementById("title").style.color = "whitesmoke";
           }
           if(x.message===slim || x.message===moderate){
-            document.body.style.backgroundImage = "url('overcast.jpg')";
+            document.body.style.backgroundImage = "url('./Backgrounds/overcast.jpg')";
             document.getElementById("message-container").style.backgroundColor = "lightgrey";
             document.getElementById("message-container").style.color="black";
           }
           if(x.message===high){
-            document.body.style.backgroundImage = "url('rainyday.jpg')";
+            document.body.style.backgroundImage = "url('./Backgrounds/rainyday.jpg')";
             document.getElementById("message-container").style.backgroundColor = "#3b7b91";
             document.getElementById("message-container").style.color = "whitesmoke";
             document.getElementById("title").style.color = "whitesmoke";
           }
           if(x.message===cold){
-            document.body.style.backgroundImage = "url('snowysky.jpg')";
+            document.body.style.backgroundImage = "url('./Backgrounds/snowysky.jpg')";
             document.getElementById("message-container").style.backgroundColor = "whitesmoke";
             document.getElementById("message-container").style.color="black";
           }
