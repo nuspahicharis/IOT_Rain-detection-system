@@ -3,10 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rain Detection System</title>
+    <title>Rain-Detection-System</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
-  <body>
+  <body id="body" onload="LoadData()">
+    <div id="title" class="title-container">
+      <h2>Hello, and welcome to my rain dedection system simulator project</h2>
+    </div>
+    <div class="container">
+      <div id="temperature" class="value-text">
+        Temperature
+        <div id="tempvalue" class="values"></div>
+        <p>Color from blue(cold) to orange(warm)</p>
+      </div>
+      <div id="humidity" class="value-text">
+        Humidity
+        <div id="humvalue" class="values"></div>
+        <p>Color from blue(dry) to pink(humid)</p>
+      </div>
+      <div id="pressure" class="value-text">
+        Pressure
+        <div id="pavalue" class="values"></div>
+        <p>Color cyan from light(low pressure) to dark(high pressure)</p>
+      </div>
+      <div id="light" class="value-text">
+        Light
+        <div id="luxvalue" class="values"></div>
+        <p>Color from orange(dark) to blue(bright)</p>
+      </div>
+    </div>
+    <div id="message-container" class="message-container">
+      <h3 id="message"></h3>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
