@@ -109,15 +109,38 @@ namespace DesktopApp
             for (int i = 0; i < (int)nudNumberOfData.Value; i++)
             {
                 Thread.Sleep(3000);
-                nudTemparature.Value = random.Next(-10, 51);
-                nudHumidity.Value = random.Next(0, 101);
-                nudPressure.Value = random.Next(950, 1051);
-                nudLight.Value = random.Next(1, 100001);
+
+                int temp = (int)nudTemparature.Value;
+                int hum = (int)nudHumidity.Value;
+                int pa = (int)nudPressure.Value;
+                int lux = (int)nudLight.Value;
+
+                int randTemp = random.Next(-10, 36);
+                int randHum = random.Next(0, 101);
+                int randPa = random.Next(950, 1051);
+                int randLux = random.Next(1, 100001);
+
+
+
+                if (100 * (Math.Abs(temp - randTemp) / ((temp + randTemp) / 2)) < 10)
+                    nudTemparature.Value = randTemp;
+
+                if (100 * (Math.Abs(hum - randHum) / ((hum + randHum) / 2)) < 35)
+                    nudHumidity.Value = randHum;
+
+                if (100 * (Math.Abs(pa - randPa) / ((pa + randPa) / 2)) < 35)
+                    nudPressure.Value = randPa;
+
+                if (100 * (Math.Abs(lux - randLux) / ((lux + randLux) / 2)) < 45)
+                    nudLight.Value = randLux;
+
+
                 SaveData();
                 LoadData();
             }
 
             MessageBox.Show(nudNumberOfData.Value + " records created");
         }
+
     }
 }
