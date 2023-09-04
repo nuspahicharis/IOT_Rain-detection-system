@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "C0w/gY2f8aSihvopsocfWaLohDXI7KY40g2krjnTWbO9piWBeMCyVCZUKsLvJPsEua08rQexs706t1okMk2NyQ==",
+  "dgSpecHash": "81RcmTse1ulW+SK4zYkX4Ma2350ynViySV91b3ecGoTkSmuhSXnG5oT+oOTgpcLdn7HpG5DRXDkRlPmJP6zczA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\haris\\Desktop\\IOT_Rain-detection-system\\BackEnd+DesktopApp\\Rain-Detection-System\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\haris\\Desktop\\IOT_Rain-detection-system\\Simulator&API - Solution\\Rain-Detection-System\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\haris\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\haris\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
