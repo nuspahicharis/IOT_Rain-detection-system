@@ -6,7 +6,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,25 +22,10 @@ namespace DesktopApp
         public Form1()
         {
             InitializeComponent();
-
+            dgvWeatherValues.AutoGenerateColumns = false;
         }
 
-
-
-        public void ClearData()
-        {
-            nudTemparature.Value = 0;
-            nudHumidity.Value = 0;
-            nudPressure.Value = 1000;
-            nudLight.Value = 5000;
-        }
-
-        private void btnClearValues_Click(object sender, EventArgs e)
-        {
-            ClearData();
-        }
-
-        private void btnSetValues_Click(object sender, EventArgs e)
+        private void SaveData()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -56,6 +43,17 @@ namespace DesktopApp
                 connection.Close();
                 LoadData();
             }
+
+
+        }
+
+        public void ClearData()
+        {
+            nudTemparature.Value = 18;
+            nudHumidity.Value = 30;
+            nudPressure.Value = 1000;
+            nudLight.Value = 5000;
+
         }
 
         private void LoadData()
@@ -82,17 +80,67 @@ namespace DesktopApp
                 connection.Close();
             }
 
+            values.Reverse();
+
             dgvWeatherValues.DataSource = values;
         }
 
+        private void btnClearValues_Click(object sender, EventArgs e)
+        {
+            ClearData();
+        }
 
-
+        private void btnSetValues_Click(object sender, EventArgs e)
+        {
+            SaveData();
+            
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadData();
         }
 
-    
+
+        private void btnAutoGenerate_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < (int)nudNumberOfData.Value; i++)
+            {
+                Thread.Sleep(3000);
+
+                int temp = (int)nudTemparature.Value;
+                int hum = (int)nudHumidity.Value;
+                int pa = (int)nudPressure.Value;
+                int lux = (int)nudLight.Value;
+
+                int randTemp = random.Next(-10, 36);
+                int randHum = random.Next(0, 101);
+                int randPa = random.Next(950, 1051);
+                int randLux = random.Next(1, 100001);
+
+
+
+                if (100 * (Math.Abs(temp - randTemp) / ((temp + randTemp) / 2)) < 10)
+                    nudTemparature.Value = randTemp;
+
+                if (100 * (Math.Abs(hum - randHum) / ((hum + randHum) / 2)) < 35)
+                    nudHumidity.Value = randHum;
+
+                if (100 * (Math.Abs(pa - randPa) / ((pa + randPa) / 2)) < 35)
+                    nudPressure.Value = randPa;
+
+                if (100 * (Math.Abs(lux - randLux) / ((lux + randLux) / 2)) < 45)
+                    nudLight.Value = randLux;
+
+
+                SaveData();
+                LoadData();
+            }
+
+            MessageBox.Show(nudNumberOfData.Value + " records created");
+        }
+
     }
 }
