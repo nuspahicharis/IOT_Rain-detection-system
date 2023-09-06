@@ -130,7 +130,80 @@ let err = "Incorrect reading, cannot give estimate for rain";
   }
 
 
+  anychart.onDocumentReady(function () {
+  
+    // add data
+    var data = [
+      ["2003", 1, 0, 0],
+      ["2004", 4, 0, 0],
+      ["2005", 6, 0, 0],
+      ["2006", 9, 1, 0],
+      ["2007", 12, 2, 0],
+      ["2008", 13, 5, 1],
+      ["2009", 15, 6, 1],
+      ["2010", 16, 9, 1],
+      ["2011", 16, 10, 4],
+      ["2012", 17, 11, 5],
+      ["2013", 17, 13, 6],
+      ["2014", 17, 14, 7],
+      ["2015", 17, 14, 10],
+      ["2016", 17, 14, 12],
+      ["2017", 19, 16, 12],
+      ["2018", 20, 17, 14],
+      ["2019", 20, 19, 16],
+      ["2020", 20, 20, 17],
+      ["2021", 20, 20, 20],
+      ["2022", 20, 22, 20]
+    ];
 
+    // create a data set
+    var dataSet = anychart.data.set(data);
+
+    // map the data for all series
+    var firstSeriesData = dataSet.mapAs({x: 0, value: 1});
+    var secondSeriesData = dataSet.mapAs({x: 0, value: 2});
+    var thirdSeriesData = dataSet.mapAs({x: 0, value: 3});
+    var fourthSeriesData = dataSet.mapAs({x:0,value:2});
+
+    // create a line chart
+    var chart1 = anychart.line();
+    var chart2 = anychart.line();
+    var chart3 = anychart.line();
+    var chart4 = anychart.line();
+
+    // create the series and name them
+    var firstSeries = chart4.line(firstSeriesData);
+    firstSeries.name("Roger Federer");
+    var secondSeries = chart1.line(secondSeriesData);
+    secondSeries.name("Rafael Nadal");
+    var thirdSeries = chart2.line(thirdSeriesData);
+    thirdSeries.name("Novak Djokovic");
+    var thirdSeries = chart3.line(fourthSeriesData);
+    thirdSeries.name("Novake Djokovic");
+
+    // add a legend
+    //chart1.legend().enabled(true);
+
+    // add a title
+    chart1.title("Temperature");
+    chart2.title("Humidity");
+    chart3.title("Pressure");
+    chart4.title("Light");
+
+    // specify where to display the chart
+    chart1.container("tempLine");
+    chart2.container("humLine");
+    chart3.container("paLine");
+    chart4.container("luxLine");
+
+
+    // draw the resulting chart
+    chart1.draw();
+    chart2.draw();
+    chart4.draw();
+    chart3.draw();
+
+  });
   
 
 

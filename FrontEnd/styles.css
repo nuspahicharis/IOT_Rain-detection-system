@@ -15,18 +15,18 @@ p {
   text-align: center;
   margin: auto;
   width: 75%;
-  margin-top: 60px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.container {
+.values-container {
   text-align: center;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
   width: 70%;
   justify-content: space-between;
-  margin-top: 33px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .value-text {
@@ -56,14 +56,33 @@ p {
   background-color: whitesmoke;
 }
 
+.lineCharts-container {
+  width: 90%;
+  margin: 10px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.linechart {
+  padding: 20px;
+  margin: 10px;
+  border-style: groove;
+  border-width: 5px;
+  border-radius: 15px;
+  font-weight: bold;
+  background-color: whitesmoke;
+  width: 17.5%;
+}
+
 @media only screen and (max-width: 768px) {
-  .container {
+  .values-container {
     width: 90%;
   }
 }
 
-@media only screen and (max-width: 480px) {
-  .container {
+@media only screen and (max-width: 535px) {
+  .values-container {
     width: 100%;
   }
   .value-text {
