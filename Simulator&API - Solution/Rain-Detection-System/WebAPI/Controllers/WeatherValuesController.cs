@@ -35,6 +35,28 @@ namespace RDS_WebAPI.Controllers
         }
 
         [HttpGet("")]
+        public async Task<IActionResult> GetAllValues()
+        {
+            var values = await _dbContext.WeatherValues.ToListAsync();
+
+            var viewModel = new List<WeatherValuesViewModel>();
+
+            foreach (var v in values)
+            { 
+                viewModel.Add(new WeatherValuesViewModel
+                {
+                    Temperature = v.Temperature,
+                    Humidity = v.Humidity,
+                    Pressure = v.Pressure,
+                    Light = v.Light
+                });
+         
+            }
+
+            return Ok(viewModel);
+        }
+
+        [HttpGet("")]
         public async Task<IActionResult> GetMessage()
         {
             var value = await _dbContext.WeatherValues.OrderBy(x => x.ID).LastAsync();
