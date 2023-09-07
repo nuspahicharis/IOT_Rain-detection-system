@@ -15,18 +15,21 @@ p {
   text-align: center;
   margin: auto;
   width: 75%;
-  margin-top: 60px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: black;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
-.container {
+.values-container {
   text-align: center;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
+  width: 90%;
   justify-content: space-between;
-  margin-top: 33px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .value-text {
@@ -37,17 +40,17 @@ p {
   border-radius: 15px;
   font-weight: bold;
   background-color: whitesmoke;
-  width: 35%;
+  width: 40%;
 }
 
 .values {
-  padding-top: 30px;
+  padding-top: 10px;
   font-size: large;
 }
 
 .message-container {
   text-align: center;
-  margin: auto;
+  margin: 30px auto;
   font-weight: bold;
   border-style: ridge;
   border-width: 5px;
@@ -56,20 +59,39 @@ p {
   background-color: whitesmoke;
 }
 
+.linechart {
+  width: 100%;
+  margin: 10px auto;
+  border-style: ridge;
+  border-width: 5px;
+  border-radius: 15px;
+  font-weight: bold;
+  background-color: whitesmoke;
+}
+
 @media only screen and (max-width: 768px) {
-  .container {
-    width: 90%;
+  .values-container {
+    width: 95%;
+  }
+
+  .value-text {
+    width: 100%;
   }
 }
 
-@media only screen and (max-width: 480px) {
-  .container {
-    width: 100%;
+@media only screen and (max-width: 535px) {
+  .values-container {
+    width: 95%;
   }
   .value-text {
     width: 90%;
   }
-
+  .lineCharts-container {
+    width: 90%;
+  }
+  .linechart {
+    width: 100%;
+  }
   .message-container {
     width: 90%;
   }

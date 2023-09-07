@@ -7,35 +7,42 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <link rel="icon" href="./Backgrounds/icon.ico" type="image/x-icon" />
   </head>
-  <body id="body" onload="LoadData()">
+  <body onload="LoadData()">
+    <script></script>
     <div id="title" class="title-container">
-      <h2>Hello, and welcome to my rain dedection system simulator project</h2>
+      <h1>Hello, and welcome to my rain dedection system simulator project</h1>
     </div>
-    <div class="container">
+    <div id="message-container" class="message-container">
+      <h3 id="message"></h3>
+    </div>
+    <div class="values-container">
       <div id="temperature" class="value-text">
         Temperature
         <div id="tempvalue" class="values"></div>
         <p>Color from blue(cold) to orange(warm)</p>
+        <canvas id="tempLine" class="linechart"></canvas>
       </div>
       <div id="humidity" class="value-text">
         Humidity
         <div id="humvalue" class="values"></div>
         <p>Color from blue(dry) to pink(humid)</p>
+        <canvas id="humLine" class="linechart"></canvas>
       </div>
       <div id="pressure" class="value-text">
         Pressure
         <div id="pavalue" class="values"></div>
         <p>Color cyan from light(low pressure) to dark(high pressure)</p>
+        <canvas id="paLine" class="linechart"></canvas>
       </div>
       <div id="light" class="value-text">
         Light
         <div id="luxvalue" class="values"></div>
         <p>Color from orange(dark) to blue(bright)</p>
+        <canvas id="luxLine" class="linechart"></canvas>
       </div>
     </div>
-    <div id="message-container" class="message-container">
-      <h3 id="message"></h3>
-    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
