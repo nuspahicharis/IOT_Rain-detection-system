@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.dgvWeatherValues = new System.Windows.Forms.DataGridView();
+            this.Temperature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Humidity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pressure = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Light = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nudLight = new System.Windows.Forms.NumericUpDown();
             this.nudPressure = new System.Windows.Forms.NumericUpDown();
             this.nudHumidity = new System.Windows.Forms.NumericUpDown();
@@ -40,10 +44,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Temperature = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Humidity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pressure = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Light = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAutoGenerate = new System.Windows.Forms.Button();
             this.nudNumberOfData = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -73,6 +73,42 @@
             this.dgvWeatherValues.RowTemplate.Height = 28;
             this.dgvWeatherValues.Size = new System.Drawing.Size(656, 473);
             this.dgvWeatherValues.TabIndex = 31;
+            // 
+            // Temperature
+            // 
+            this.Temperature.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Temperature.DataPropertyName = "Temperature";
+            this.Temperature.HeaderText = "Temperature";
+            this.Temperature.MinimumWidth = 8;
+            this.Temperature.Name = "Temperature";
+            this.Temperature.ReadOnly = true;
+            // 
+            // Humidity
+            // 
+            this.Humidity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Humidity.DataPropertyName = "Humidity";
+            this.Humidity.HeaderText = "Humidity";
+            this.Humidity.MinimumWidth = 8;
+            this.Humidity.Name = "Humidity";
+            this.Humidity.ReadOnly = true;
+            // 
+            // Pressure
+            // 
+            this.Pressure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Pressure.DataPropertyName = "Pressure";
+            this.Pressure.HeaderText = "Pressure";
+            this.Pressure.MinimumWidth = 8;
+            this.Pressure.Name = "Pressure";
+            this.Pressure.ReadOnly = true;
+            // 
+            // Light
+            // 
+            this.Light.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Light.DataPropertyName = "Light";
+            this.Light.HeaderText = "Light";
+            this.Light.MinimumWidth = 8;
+            this.Light.Name = "Light";
+            this.Light.ReadOnly = true;
             // 
             // nudLight
             // 
@@ -228,42 +264,6 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Temperature";
             // 
-            // Temperature
-            // 
-            this.Temperature.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Temperature.DataPropertyName = "Temperature";
-            this.Temperature.HeaderText = "Temperature";
-            this.Temperature.MinimumWidth = 8;
-            this.Temperature.Name = "Temperature";
-            this.Temperature.ReadOnly = true;
-            // 
-            // Humidity
-            // 
-            this.Humidity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Humidity.DataPropertyName = "Humidity";
-            this.Humidity.HeaderText = "Humidity";
-            this.Humidity.MinimumWidth = 8;
-            this.Humidity.Name = "Humidity";
-            this.Humidity.ReadOnly = true;
-            // 
-            // Pressure
-            // 
-            this.Pressure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Pressure.DataPropertyName = "Pressure";
-            this.Pressure.HeaderText = "Pressure";
-            this.Pressure.MinimumWidth = 8;
-            this.Pressure.Name = "Pressure";
-            this.Pressure.ReadOnly = true;
-            // 
-            // Light
-            // 
-            this.Light.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Light.DataPropertyName = "Light";
-            this.Light.HeaderText = "Light";
-            this.Light.MinimumWidth = 8;
-            this.Light.Name = "Light";
-            this.Light.ReadOnly = true;
-            // 
             // btnAutoGenerate
             // 
             this.btnAutoGenerate.Location = new System.Drawing.Point(604, 114);
@@ -292,6 +292,11 @@
             this.nudNumberOfData.Name = "nudNumberOfData";
             this.nudNumberOfData.Size = new System.Drawing.Size(143, 22);
             this.nudNumberOfData.TabIndex = 33;
+            this.nudNumberOfData.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
             // 
             // label5
             // 
@@ -324,8 +329,13 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NodeMCU Simulator";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvWeatherValues)).EndInit();
