@@ -33,7 +33,6 @@ namespace DesktopApp
                 string sql = "INSERT INTO WeatherValues VALUES (@Temp, @Hum, @Pa, @Lux);";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    //command.Parameters.AddWithValue("@ID", len + 1);
                     command.Parameters.AddWithValue("@Temp", nudTemparature.Value);
                     command.Parameters.AddWithValue("@Hum", nudHumidity.Value);
                     command.Parameters.AddWithValue("@Pa", nudPressure.Value);
@@ -41,11 +40,31 @@ namespace DesktopApp
                     command.ExecuteNonQuery();
                 }
                 connection.Close();
+
                 LoadData();
             }
 
-
         }
+
+        public async Task SaveDataAsync(int temp, int hum, int pa, int lux)
+        {
+            await Task.Delay(3000);
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                string sql = "INSERT INTO WeatherValues VALUES (@Temp, @Hum, @Pa, @Lux);";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Temp", temp);
+                    command.Parameters.AddWithValue("@Hum", hum);
+                    command.Parameters.AddWithValue("@Pa", pa);
+                    command.Parameters.AddWithValue("@Lux", lux);
+                    await command.ExecuteNonQueryAsync();
+                }
+                connection.Close();
+            }
+        }
+
 
         public void ClearData()
         {
@@ -102,13 +121,12 @@ namespace DesktopApp
         }
 
 
-        private void btnAutoGenerate_Click(object sender, EventArgs e)
+        private async void btnAutoGenerate_Click(object sender, EventArgs e)
         {
             Random random = new Random();
 
             for (int i = 0; i < (int)nudNumberOfData.Value; i++)
             {
-                Thread.Sleep(3000);
 
                 int temp = (int)nudTemparature.Value;
                 int hum = (int)nudHumidity.Value;
@@ -126,22 +144,19 @@ namespace DesktopApp
                 int randPa = random.Next(950, 1051);
                 int randLux = random.Next(1, 100001);
 
-           
-                nudTemparature.Value = randTemp;
+                
 
-                nudHumidity.Value = randHum;
+                await SaveDataAsync(randTemp,randHum,randPa,randLux);
 
-                nudPressure.Value = randPa;
-
-                nudLight.Value = randLux;
-
-
-                SaveData();
-                LoadData();
             }
+
+            LoadData();
+
 
             MessageBox.Show(nudNumberOfData.Value + " records created");
         }
+
+
 
     }
 }
