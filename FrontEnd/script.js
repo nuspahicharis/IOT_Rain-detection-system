@@ -58,7 +58,7 @@ function LoadData() {
             document.body.style.backgroundImage = "url('./Backgrounds/rainyday.jpg')";
             document.getElementById("message-container").style.backgroundColor = "#3b7b91";
             document.getElementById("message-container").style.color = "whitesmoke";
-            document.getElementById("title").style.color = "#3b7b91";
+            document.getElementById("title").style.color = "whitesmoke";
 
           }
           if(x.message===cold){
