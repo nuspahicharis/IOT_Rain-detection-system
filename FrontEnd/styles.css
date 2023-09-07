@@ -24,7 +24,7 @@ p {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
+  width: 90%;
   justify-content: space-between;
   margin-top: 20px;
 }
@@ -37,7 +37,7 @@ p {
   border-radius: 15px;
   font-weight: bold;
   background-color: whitesmoke;
-  width: 35%;
+  width: 40%;
 }
 
 .values {
@@ -47,7 +47,7 @@ p {
 
 .message-container {
   text-align: center;
-  margin: auto;
+  margin: 30px auto;
   font-weight: bold;
   border-style: ridge;
   border-width: 5px;
@@ -56,17 +56,15 @@ p {
   background-color: whitesmoke;
 }
 
-.lineCharts-container {
-  width: 70%;
-  margin: 10px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+#datachart-title {
+  text-align: center;
+  margin: auto;
 }
 
 .linechart {
-  margin: 10px;
-  border-style: groove;
+  width: 100%;
+  margin: 10px auto;
+  border-style: ridge;
   border-width: 5px;
   border-radius: 15px;
   font-weight: bold;
@@ -75,16 +73,17 @@ p {
 
 @media only screen and (max-width: 768px) {
   .values-container {
-    width: 90%;
+    width: 95%;
   }
-  .lineCharts-container {
-    width: 90%;
+
+  .value-text {
+    width: 100%;
   }
 }
 
 @media only screen and (max-width: 535px) {
   .values-container {
-    width: 100%;
+    width: 95%;
   }
   .value-text {
     width: 90%;

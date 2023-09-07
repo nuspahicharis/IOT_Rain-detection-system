@@ -45,6 +45,7 @@ function LoadData() {
             document.getElementById("message-container").style.backgroundColor = "lightyellow";
             document.getElementById("message-container").style.color="black";
             document.getElementById("title").style.color = "whitesmoke";
+
           }
           if(x.message===slim || x.message===moderate){
             document.body.style.backgroundImage = "url('./Backgrounds/overcast.jpg')";
@@ -56,11 +57,14 @@ function LoadData() {
             document.getElementById("message-container").style.backgroundColor = "#3b7b91";
             document.getElementById("message-container").style.color = "whitesmoke";
             document.getElementById("title").style.color = "whitesmoke";
+
           }
           if(x.message===cold){
             document.body.style.backgroundImage = "url('./Backgrounds/snowysky.jpg')";
             document.getElementById("message-container").style.backgroundColor = "whitesmoke";
             document.getElementById("message-container").style.color="black";
+            document.getElementById("title").style.color = "whitesmoke";
+
           }
           if(x.message===err){
             document.body.style.backgroundImage = "url()";
@@ -88,7 +92,7 @@ function LoadData() {
           document.getElementById("luxvalue").innerHTML = `${x.light}`;
 
           //temperature
-          if(parseInt(x.temperature)>25){
+          if(parseInt(x.temperature)>29){
             document.getElementById("temperature").style.backgroundColor = "orange";
           }
           else if(parseInt(x.temperature) <=0){
@@ -167,13 +171,13 @@ function LoadData() {
                 obj.temperature
               );
               HumValues.push(
-                x.humidity
+                obj.humidity
               );
               PaValues.push(
-                x.pressure
+                obj.pressure
               );
               LuxValues.push(
-                x.light
+                obj.light
               );
             }
 
@@ -181,12 +185,13 @@ function LoadData() {
 
             //temperature chart update
             temperatureChart.destroy();
-            console.log(x[valueCounter-1].temperature);
+
             var tempBorder = "yellow";
-            if(x[valueCounter-1].temperature>30)
+            if(x[valueCounter-1].temperature>29)
               tempBorder = "orange";
             else if(x[valueCounter-1].temperature<1)
               tempBorder = "blue";
+
             temperatureChart = new Chart(ctxTemp, {
               type : 'line',
               data : {
@@ -194,20 +199,97 @@ function LoadData() {
                 datasets : [
                     {
                       data : TempValues,
-                      label : "Temperature",
+                      label: "Temperature",
                       borderColor : tempBorder,
                       fill : false
                     }]
               },
               options : {
-                title : {
-                  display : true,
-                  text : 'Chart JS Line Chart Example'
-                },
                 animation:false
               }
             });
             
+            
+
+            //humidity chart update
+            humidityChart.destroy();
+
+            var tempBorder = "purple";
+            if(x[valueCounter-1].humidity>60)
+              tempBorder = "pink";
+            else if(x[valueCounter-1].humidity<30)
+              tempBorder = "blue";
+
+            humidityChart = new Chart(ctxHum, {
+              type : 'line',
+              data : {
+                labels : valueLables,
+                datasets : [
+                    {
+                      data : HumValues,
+                      label : "Humidtiy",
+                      borderColor : tempBorder,
+                      fill : false
+                    }]
+              },
+              options : {
+                animation:false
+              }
+            });
+
+            //pressure chart update
+            pressureChart.destroy();
+            
+            var tempBorder = "cyan";
+            if(x[valueCounter-1].pressure>1000)
+              tempBorder = "darkcyan";
+            else if(x[valueCounter-1].pressure<1000)
+              tempBorder = "lightblue";
+
+            pressureChart = new Chart(ctxPa, {
+              type : 'line',
+              data : {
+                labels : valueLables,
+                datasets : [
+                    {
+                      data : PaValues,
+                      label : "Pressure",
+                      borderColor : tempBorder,
+                      fill : false
+                    }]
+              },
+              options : {
+                animation:false
+              }
+            });
+
+            //light chart update
+            lightChart.destroy();
+
+            var tempBorder = "lightblue";
+            if(x[valueCounter-1].light<50)
+              tempBorder = "salmon";
+            else if(x[valueCounter-1].light>50 && x[valueCounter-1].light<1001)
+              tempBorder = "black";
+            else if(x[valueCounter-1].light>1000 && x[valueCounter-1].light<15001)
+              tempBorder = "lightgrey";
+
+            lightChart = new Chart(ctxLux, {
+              type : 'line',
+              data : {
+                labels : valueLables,
+                datasets : [
+                    {
+                      data : LuxValues,
+                      label : "Light",
+                      borderColor : tempBorder,
+                      fill : false
+                    }]
+              },
+              options : {
+                animation:false
+              }
+            });
 
 
 
@@ -220,86 +302,41 @@ function LoadData() {
     }, 1000);
   }
 
+
+  //chart initializations
+
   var temperatureChart = new Chart(ctxTemp, {
     type : 'line',
     data : {
       labels : [],
-      datasets : [
-          {
-            data : [],
-            label : "",
-            borderColor : "darkgrey",
-            fill : false
-          }]
+      datasets : []
     },
     options : {
-      title : {
-        display : true,
-        text : 'Chart JS Line Chart Example'
-      },
       animation:false
     }
   });
   
-  
-
-  var humidity = new Chart(ctxHum, {
+  var humidityChart = new Chart(ctxHum, {
     type : 'line',
     data : {
       labels : [],
-      datasets : [
-          {
-            data : [],
-            label : "Humidity",
-            borderColor : "#3cba9f",
-            fill : false
-          }]
-    },
-    options : {
-      title : {
-        display : true,
-        text : 'Chart JS Line Chart Example'
+      datasets : []
       }
+  });
+
+  var pressureChart = new Chart(ctxPa, {
+    type : 'line',
+    data : {
+      labels : [],
+      datasets : []
     }
   });
 
-  var pressure = new Chart(ctxPa, {
+  var lightChart = new Chart(ctxLux, {
     type : 'line',
     data : {
       labels : [],
-      datasets : [
-          {
-            data : [],
-            label : "Pressure",
-            borderColor : "#3cba9f",
-            fill : false
-          }]
-    },
-    options : {
-      title : {
-        display : true,
-        text : 'Chart JS Line Chart Example'
-      }
-    }
-  });
-
-  var light = new Chart(ctxLux, {
-    type : 'line',
-    data : {
-      labels : [],
-      datasets : [
-          {
-            data : [],
-            label : "Light",
-            borderColor : "#3cba9f",
-            fill : false
-          }]
-    },
-    options : {
-      title : {
-        display : true,
-        text : 'Chart JS Line Chart Example'
-      }
+      datasets : []
     }
   });
 
