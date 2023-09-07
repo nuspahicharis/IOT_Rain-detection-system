@@ -57,7 +57,7 @@ p {
 }
 
 .lineCharts-container {
-  width: 90%;
+  width: 70%;
   margin: 10px auto;
   display: flex;
   flex-wrap: wrap;
@@ -65,18 +65,19 @@ p {
 }
 
 .linechart {
-  padding: 20px;
   margin: 10px;
   border-style: groove;
   border-width: 5px;
   border-radius: 15px;
   font-weight: bold;
   background-color: whitesmoke;
-  width: 17.5%;
 }
 
 @media only screen and (max-width: 768px) {
   .values-container {
+    width: 90%;
+  }
+  .lineCharts-container {
     width: 90%;
   }
 }
@@ -88,7 +89,12 @@ p {
   .value-text {
     width: 90%;
   }
-
+  .lineCharts-container {
+    width: 90%;
+  }
+  .linechart {
+    width: 100%;
+  }
   .message-container {
     width: 90%;
   }

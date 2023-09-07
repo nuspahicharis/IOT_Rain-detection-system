@@ -2,19 +2,31 @@ const body = document.querySelector("body");
 
 function LoadData() {
   getMessage();
-  getValues();
+  getLastValue();
+  getAllValues();
+  
 }
 
-let no = "No rain expected!";
-let slim = "Slim possibility of rain!";
-let moderate = "Moderate possibility of rain!";
-let high = "High possibility of rain!";
-let cold = "Too cold for rain!";
-let err = "Incorrect reading, cannot give estimate for rain";
+  let no = "No rain expected!";
+  let slim = "Slim possibility of rain!";
+  let moderate = "Moderate possibility of rain!";
+  let high = "High possibility of rain!";
+  let cold = "Too cold for rain!";
+  let err = "Incorrect reading, cannot give estimate for rain";
 
-
+  let valueCounter = 0;
+  let valueLables =[];
+  let valueData = [];
+  
   let valueURL = 'https://localhost:7131/api/WeatherValues/GetLastValue';
   let messageURL = 'https://localhost:7131/api/WeatherValues/GetMessage';
+  let allValuesURL = 'https://localhost:7131/api/WeatherValues/GetAllValues';
+
+  let ctxTemp = document.getElementById("tempLine");
+  let ctxHum = document.getElementById("humLine");
+  let ctxPa = document.getElementById("paLine");
+  let ctxLux = document.getElementById("luxLine");
+
 
 
   function getMessage() {
@@ -61,7 +73,7 @@ let err = "Incorrect reading, cannot give estimate for rain";
     },1000);
   }
 
-  function getValues() {
+  function getLastValue() {
     setInterval(async function(){
       await fetch(valueURL)
       .then((r) => {
@@ -129,81 +141,169 @@ let err = "Incorrect reading, cannot give estimate for rain";
     },1000);
   }
 
+  function getAllValues() {
+    setInterval(async function () {
+      await fetch(allValuesURL)
+        .then((r) => {
+          if (r.status !== 200) {
+            alert("Server javlja grešku: " + r.status);
+            return;
+          }
+          r.json().then((x) => {
 
-  anychart.onDocumentReady(function () {
-  
-    // add data
-    var data = [
-      ["2003", 1, 0, 0],
-      ["2004", 4, 0, 0],
-      ["2005", 6, 0, 0],
-      ["2006", 9, 1, 0],
-      ["2007", 12, 2, 0],
-      ["2008", 13, 5, 1],
-      ["2009", 15, 6, 1],
-      ["2010", 16, 9, 1],
-      ["2011", 16, 10, 4],
-      ["2012", 17, 11, 5],
-      ["2013", 17, 13, 6],
-      ["2014", 17, 14, 7],
-      ["2015", 17, 14, 10],
-      ["2016", 17, 14, 12],
-      ["2017", 19, 16, 12],
-      ["2018", 20, 17, 14],
-      ["2019", 20, 19, 16],
-      ["2020", 20, 20, 17],
-      ["2021", 20, 20, 20],
-      ["2022", 20, 22, 20]
-    ];
+            TempValues = [];
+            HumValues = [];
+            PaValues = [];
+            LuxValues =[];
 
-    // create a data set
-    var dataSet = anychart.data.set(data);
-
-    // map the data for all series
-    var firstSeriesData = dataSet.mapAs({x: 0, value: 1});
-    var secondSeriesData = dataSet.mapAs({x: 0, value: 2});
-    var thirdSeriesData = dataSet.mapAs({x: 0, value: 3});
-    var fourthSeriesData = dataSet.mapAs({x:0,value:2});
-
-    // create a line chart
-    var chart1 = anychart.line();
-    var chart2 = anychart.line();
-    var chart3 = anychart.line();
-    var chart4 = anychart.line();
-
-    // create the series and name them
-    var firstSeries = chart4.line(firstSeriesData);
-    firstSeries.name("Roger Federer");
-    var secondSeries = chart1.line(secondSeriesData);
-    secondSeries.name("Rafael Nadal");
-    var thirdSeries = chart2.line(thirdSeriesData);
-    thirdSeries.name("Novak Djokovic");
-    var thirdSeries = chart3.line(fourthSeriesData);
-    thirdSeries.name("Novake Djokovic");
-
-    // add a legend
-    //chart1.legend().enabled(true);
-
-    // add a title
-    chart1.title("Temperature");
-    chart2.title("Humidity");
-    chart3.title("Pressure");
-    chart4.title("Light");
-
-    // specify where to display the chart
-    chart1.container("tempLine");
-    chart2.container("humLine");
-    chart3.container("paLine");
-    chart4.container("luxLine");
+            valueCounter = 0;
+            valueLables = [];
 
 
-    // draw the resulting chart
-    chart1.draw();
-    chart2.draw();
-    chart4.draw();
-    chart3.draw();
+            for (const obj of x) {
+              valueCounter++;
+              valueLables.push(valueCounter);
+              TempValues.push(
+                obj.temperature
+              );
+              HumValues.push(
+                x.humidity
+              );
+              PaValues.push(
+                x.pressure
+              );
+              LuxValues.push(
+                x.light
+              );
+            }
 
+
+
+            //temperature chart update
+            temperatureChart.destroy();
+            console.log(x[valueCounter-1].temperature);
+            var tempBorder = "yellow";
+            if(x[valueCounter-1].temperature>30)
+              tempBorder = "orange";
+            else if(x[valueCounter-1].temperature<1)
+              tempBorder = "blue";
+            temperatureChart = new Chart(ctxTemp, {
+              type : 'line',
+              data : {
+                labels : valueLables,
+                datasets : [
+                    {
+                      data : TempValues,
+                      label : "Temperature",
+                      borderColor : tempBorder,
+                      fill : false
+                    }]
+              },
+              options : {
+                title : {
+                  display : true,
+                  text : 'Chart JS Line Chart Example'
+                },
+                animation:false
+              }
+            });
+            
+
+
+
+
+          });
+        })
+        .catch((err) => {
+          alert("Greška u komunikaciji sa serverom: " + err);
+        });
+    }, 1000);
+  }
+
+  var temperatureChart = new Chart(ctxTemp, {
+    type : 'line',
+    data : {
+      labels : [],
+      datasets : [
+          {
+            data : [],
+            label : "",
+            borderColor : "darkgrey",
+            fill : false
+          }]
+    },
+    options : {
+      title : {
+        display : true,
+        text : 'Chart JS Line Chart Example'
+      },
+      animation:false
+    }
   });
   
+  
+
+  var humidity = new Chart(ctxHum, {
+    type : 'line',
+    data : {
+      labels : [],
+      datasets : [
+          {
+            data : [],
+            label : "Humidity",
+            borderColor : "#3cba9f",
+            fill : false
+          }]
+    },
+    options : {
+      title : {
+        display : true,
+        text : 'Chart JS Line Chart Example'
+      }
+    }
+  });
+
+  var pressure = new Chart(ctxPa, {
+    type : 'line',
+    data : {
+      labels : [],
+      datasets : [
+          {
+            data : [],
+            label : "Pressure",
+            borderColor : "#3cba9f",
+            fill : false
+          }]
+    },
+    options : {
+      title : {
+        display : true,
+        text : 'Chart JS Line Chart Example'
+      }
+    }
+  });
+
+  var light = new Chart(ctxLux, {
+    type : 'line',
+    data : {
+      labels : [],
+      datasets : [
+          {
+            data : [],
+            label : "Light",
+            borderColor : "#3cba9f",
+            fill : false
+          }]
+    },
+    options : {
+      title : {
+        display : true,
+        text : 'Chart JS Line Chart Example'
+      }
+    }
+  });
+
+  
+
 
 

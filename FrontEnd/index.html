@@ -6,11 +6,9 @@
     <title>Rain Detection System</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <link rel="icon" href="./Backgrounds/icon.ico" type="image/x-icon" />
-    <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-exports.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-ui.min.js"></script>
   </head>
   <body id="body" onload="LoadData()">
+    <script></script>
     <div id="title" class="title-container">
       <h2>Hello, and welcome to my rain dedection system simulator project</h2>
     </div>
@@ -39,12 +37,14 @@
         <p>Color from orange(dark) to blue(bright)</p>
       </div>
     </div>
+
     <div class="lineCharts-container">
-      <div id="tempLine" class="linechart"></div>
-      <div id="hunLine" class="linechart"></div>
-      <div id="paLine" class="linechart"></div>
-      <div id="luxLine" class="linechart"></div>
+      <canvas id="tempLine" class="linechart"></canvas>
+      <canvas id="humLine" class="linechart"></canvas>
+      <canvas id="paLine" class="linechart"></canvas>
+      <canvas id="luxLine" class="linechart"></canvas>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
