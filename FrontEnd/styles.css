@@ -17,6 +17,9 @@ p {
   width: 75%;
   margin-top: 30px;
   margin-bottom: 30px;
+  color: black;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 .values-container {
@@ -41,7 +44,7 @@ p {
 }
 
 .values {
-  padding-top: 30px;
+  padding-top: 10px;
   font-size: large;
 }
 
@@ -54,11 +57,6 @@ p {
   border-radius: 15px;
   width: 75%;
   background-color: whitesmoke;
-}
-
-#datachart-title {
-  text-align: center;
-  margin: auto;
 }
 
 .linechart {

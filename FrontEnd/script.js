@@ -44,19 +44,21 @@ function LoadData() {
             document.body.style.backgroundImage = "url('./Backgrounds/sunnyday.jpg')";
             document.getElementById("message-container").style.backgroundColor = "lightyellow";
             document.getElementById("message-container").style.color="black";
-            document.getElementById("title").style.color = "whitesmoke";
+            document.getElementById("title").style.color = "lightyellow";
 
           }
           if(x.message===slim || x.message===moderate){
             document.body.style.backgroundImage = "url('./Backgrounds/overcast.jpg')";
             document.getElementById("message-container").style.backgroundColor = "lightgrey";
             document.getElementById("message-container").style.color="black";
+            document.getElementById("title").style.color = "lightgrey";
+
           }
           if(x.message===high){
             document.body.style.backgroundImage = "url('./Backgrounds/rainyday.jpg')";
             document.getElementById("message-container").style.backgroundColor = "#3b7b91";
             document.getElementById("message-container").style.color = "whitesmoke";
-            document.getElementById("title").style.color = "whitesmoke";
+            document.getElementById("title").style.color = "#3b7b91";
 
           }
           if(x.message===cold){
