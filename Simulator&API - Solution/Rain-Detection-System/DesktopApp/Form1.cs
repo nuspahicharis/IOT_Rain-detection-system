@@ -115,24 +115,24 @@ namespace DesktopApp
                 int pa = (int)nudPressure.Value;
                 int lux = (int)nudLight.Value;
 
-                int randTemp = random.Next(-10, 36);
+                int randTemp = 0;
+                if (temp<0)
+                    randTemp = random.Next(-10, temp + 10);
+                else
+                    randTemp = random.Next(temp-10, temp+11);
+
                 int randHum = random.Next(0, 101);
                 int randPa = random.Next(950, 1051);
                 int randLux = random.Next(1, 100001);
 
+   
+                nudTemparature.Value = randTemp;
 
+                nudHumidity.Value = randHum;
 
-                if (100 * (Math.Abs(temp - randTemp) / ((temp + randTemp) / 2)) < 10)
-                    nudTemparature.Value = randTemp;
+                nudPressure.Value = randPa;
 
-                if (100 * (Math.Abs(hum - randHum) / ((hum + randHum) / 2)) < 35)
-                    nudHumidity.Value = randHum;
-
-                if (100 * (Math.Abs(pa - randPa) / ((pa + randPa) / 2)) < 35)
-                    nudPressure.Value = randPa;
-
-                if (100 * (Math.Abs(lux - randLux) / ((lux + randLux) / 2)) < 45)
-                    nudLight.Value = randLux;
+                nudLight.Value = randLux;
 
 
                 SaveData();
