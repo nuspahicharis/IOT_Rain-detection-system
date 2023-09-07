@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -33,7 +34,6 @@ namespace DesktopApp
                 string sql = "INSERT INTO WeatherValues VALUES (@Temp, @Hum, @Pa, @Lux);";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    //command.Parameters.AddWithValue("@ID", len + 1);
                     command.Parameters.AddWithValue("@Temp", nudTemparature.Value);
                     command.Parameters.AddWithValue("@Hum", nudHumidity.Value);
                     command.Parameters.AddWithValue("@Pa", nudPressure.Value);
@@ -41,11 +41,61 @@ namespace DesktopApp
                     command.ExecuteNonQuery();
                 }
                 connection.Close();
+
                 LoadData();
             }
 
-
         }
+
+        public async Task SaveDataAsync(int temp, int hum, int pa, int lux)
+        {
+            await Task.Delay(3000);
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                string sql = "INSERT INTO WeatherValues VALUES (@Temp, @Hum, @Pa, @Lux);";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Temp", temp);
+                    command.Parameters.AddWithValue("@Hum", hum);
+                    command.Parameters.AddWithValue("@Pa", pa);
+                    command.Parameters.AddWithValue("@Lux", lux);
+                    await command.ExecuteNonQueryAsync();
+                }
+                connection.Close();
+            }
+        }
+
+
+        public async Task<List<WeatherValues>> LoadDataAsync()
+        {
+            List<WeatherValues> values = new List<WeatherValues>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                string sql = "SELECT * FROM WeatherValues";
+                SqlCommand command = new SqlCommand(sql, connection);
+                SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                while (reader.Read())
+                {
+                    values.Add(new WeatherValues(
+                        (int)reader["ID"],
+                        (int)reader["Temperature"],
+                        (int)reader["Humidity"],
+                        (int)reader["Pressure"],
+                        (int)reader["Light"]));
+
+                }
+                reader.Close();
+                connection.Close();
+            }
+
+            values.Reverse();
+
+            return values;
+        }
+
 
         public void ClearData()
         {
@@ -53,7 +103,7 @@ namespace DesktopApp
             nudHumidity.Value = 30;
             nudPressure.Value = 1000;
             nudLight.Value = 5000;
-
+            nudNumberOfData.Value = 7;
         }
 
         private void LoadData()
@@ -102,13 +152,15 @@ namespace DesktopApp
         }
 
 
-        private void btnAutoGenerate_Click(object sender, EventArgs e)
+        private async void btnAutoGenerate_Click(object sender, EventArgs e)
         {
             Random random = new Random();
 
+            btnSetValues.Enabled = false;
+            btnClearValues.Enabled = false;
+
             for (int i = 0; i < (int)nudNumberOfData.Value; i++)
             {
-                Thread.Sleep(3000);
 
                 int temp = (int)nudTemparature.Value;
                 int hum = (int)nudHumidity.Value;
@@ -126,22 +178,21 @@ namespace DesktopApp
                 int randPa = random.Next(950, 1051);
                 int randLux = random.Next(1, 100001);
 
-           
-                nudTemparature.Value = randTemp;
+                
 
-                nudHumidity.Value = randHum;
-
-                nudPressure.Value = randPa;
-
-                nudLight.Value = randLux;
-
-
-                SaveData();
-                LoadData();
+                await SaveDataAsync(randTemp,randHum,randPa,randLux);
+                dgvWeatherValues.DataSource = await LoadDataAsync();
             }
 
+
             MessageBox.Show(nudNumberOfData.Value + " records created");
+
+            btnSetValues.Enabled = true;
+            btnClearValues.Enabled = true;
+
         }
+
+
 
     }
 }

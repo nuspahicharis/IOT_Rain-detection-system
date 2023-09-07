@@ -69,3 +69,8 @@ C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-D
 C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-Detection-System\WebAPI\obj\Debug\net7.0\WebAPI.pdb
 C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-Detection-System\WebAPI\obj\Debug\net7.0\WebAPI.genruntimeconfig.cache
 C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-Detection-System\WebAPI\obj\Debug\net7.0\ref\WebAPI.dll
+C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-Detection-System\WebAPI\bin\Debug\net7.0\Humanizer.dll
+C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-Detection-System\WebAPI\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-Detection-System\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-Detection-System\WebAPI\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\haris\Desktop\IOT_Rain-detection-system\Simulator&API - Solution\Rain-Detection-System\WebAPI\bin\Debug\net7.0\System.CodeDom.dll
