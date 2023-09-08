@@ -7,17 +7,17 @@
 #define LDR_PIN 34 //ADC pin connected to the LDR sensor
 
 
+int led = 21; //LED that tells us when data is being read/stored
+
 // Initialize DHT sensor.
 DHT dht(DHTPIN, DHTTYPE);
-
 
 void setup() {
   Serial.begin(115200);
   pinMode(LDR_PIN, INPUT);
-
+  pinMode(led, OUTPUT);
   dht.begin();
 }
-
 
 void loop() {
   // Wait a few seconds between measurements.
@@ -84,5 +84,10 @@ void loop() {
   else{
     Serial.println("Too cold for rain!");
   }
+  //set LED pin high for one second to indicate data being read
+  digitalWrite(led, HIGH);
+  delay(1000);
 
+  //set LED pin low
+  digitalWrite(led, LOW);
 }
