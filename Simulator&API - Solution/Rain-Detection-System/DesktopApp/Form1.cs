@@ -163,9 +163,7 @@ namespace DesktopApp
             {
 
                 int temp = (int)nudTemparature.Value;
-                int hum = (int)nudHumidity.Value;
-                int pa = (int)nudPressure.Value;
-                int lux = (int)nudLight.Value;
+
 
                 int randTemp = 0;
 
