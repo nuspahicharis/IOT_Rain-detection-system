@@ -6,19 +6,12 @@ For it to be a IOT system it has to be connected to the internet and in this pro
 To this WebAPI I have connected a basic website which displays the latest data from the databse in set intervals as to simulate continuous data flow from the NodeMCU.
 
 
-![](images/simulator.png)
-
-Simulator screenshot
-
-![](images/sunny-day.png)
-
-Sunny day screenshot
-
-![](images/cloudy-day.png)
-
-Cloudy day screenshot
-
-![](images/rainy-day.png)
-
-Rainy day screenshot
+<img src="images/simulator.png" width="400"></img></br>
+Simulator </br>
+Website look and style based on the chance of rain
+<div>
+  <img src="images/sunny-day.png" width="325"></img>
+  <img src="images/cloudy-day.png" width="325"></img>
+  <img src="images/rainy-day.png" width="325"></img>
+</div>
 
